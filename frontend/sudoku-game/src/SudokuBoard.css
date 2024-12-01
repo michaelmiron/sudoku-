@@ -1,24 +1,139 @@
+/* הגדרות בסיסיות לגוף ול-HTML */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* שמירה על טקסט ממורכז */
+}
+
+/* מסגרת עמוד */
+.page-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    width: 95vw;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 5px solid rgba(255, 118, 117, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 118, 117, 0.5);
+}
+
+/* כותרת */
+.custom-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff7675;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+/* כותרת משנית */
+.lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #2d3436;
+    margin-bottom: 20px;
+}
+
+/* מיכל לוח */
+.sudoku-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid #333;
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    max-width: 90vw;
+    margin: auto;
+}
+
+/* לוח סודוקו */
 .sudoku-board {
     display: grid;
-    grid-template-rows: repeat(9, 40px);
-    grid-template-columns: repeat(9, 40px);
+    grid-template-rows: repeat(9, 50px);
+    grid-template-columns: repeat(9, 50px);
     gap: 1px;
     background-color: #000;
+    border: 3px solid #000;
+    border-radius: 5px;
+    padding: 10px;
 }
 
-.sudoku-row {
-    display: contents;
-}
-
+/* תאים */
 .sudoku-cell {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    font-size: 16px;
+    background-color: #f8f9fa;
+    font-size: 20px;
     font-weight: bold;
-    width: 40px;
-    height: 40px;
-    text-align: center;
+    border: 1px solid #ccc;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
 }
+
+/* שדות קלט */
+.cell-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    outline: none;
+    color: #2d3436;
+}
+
+/* כפתורים */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    background-color: #74b9ff;
+    color: white;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* תחתית */
+.footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+
+
+
+
+

@@ -61,31 +61,49 @@ html, body {
     margin: auto;
 }
 
-/* לוח סודוקו */
 .sudoku-board {
     display: grid;
-    grid-template-rows: repeat(9, 50px);
-    grid-template-columns: repeat(9, 50px);
-    gap: 1px;
+    grid-template-rows: repeat(9, 40px);
+    grid-template-columns: repeat(9, 40px);
+    gap: 0;
     background-color: #000;
-    border: 3px solid #000;
-    border-radius: 5px;
-    padding: 10px;
+
 }
 
-/* תאים */
 .sudoku-cell {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
-    font-size: 20px;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    width: 50px;
-    height: 50px;
-    box-sizing: border-box;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    background-color: #fff; /* White background for cells */
+    border: 1px solid #ccc; /* Default thin border */
+    font-size: 16px; /* Font size for numbers */
+    font-weight: bold; /* Bold text for numbers */
+    width: 40px; /* Fixed width for cells */
+    height: 40px; /* Fixed height for cells */
+    text-align: center; /* Center text in cells */
 }
+
+/* Add thicker borders for the left edge of sub-grids */
+.subgrid-left {
+    border-left: 2px solid #000;
+}
+
+/* Add thicker borders for the top edge of sub-grids */
+.subgrid-top {
+    border-top: 2px solid #000;
+}
+
+/* Add thicker borders for the right edge of sub-grids */
+.subgrid-right {
+    border-right: 2px solid #000;
+}
+
+/* Add thicker borders for the bottom edge of sub-grids */
+.subgrid-bottom {
+    border-bottom: 2px solid #000;
+}
+
+
 
 /* שדות קלט */
 .cell-input {

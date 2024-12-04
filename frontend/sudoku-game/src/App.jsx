@@ -1,5 +1,5 @@
 import React from 'react';
-import SudokuBoard from './SudokuBoard';
+import SudokuBoard from './Components/SudokuBoard.jsx';
 
 const App = () => {
     return (

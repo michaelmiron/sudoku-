@@ -4,9 +4,9 @@ import './SudokuBoard.css';
 const SudokuBoard = () => {
     // Generate an initial Sudoku board
     const generateBoard = () => {
-        const board = Array.from({ length: 9 }, () => Array(9).fill(''));
+        const board = Array.from({length: 9}, () => Array(9).fill(''));
 
-        const isValidPlacement = (board,row,col,num)=>{
+        const isValidPlacement = (board, row, col, num) => {
             //check rows
             for (let j = 0; j < 9; j++) {
                 if (board[row][j] === num) {
@@ -19,12 +19,12 @@ const SudokuBoard = () => {
                     return false;
                 }
             }
-            const startRow =Math.floor(row/3)*3;
-            const startCol =Math.floor(col/3)*3;
+            const startRow = Math.floor(row / 3) * 3;
+            const startCol = Math.floor(col / 3) * 3;
 
             for (let i = 0; i < 3; i++) {
                 for (let j = 0; j < 3; j++) {
-                    if (board[startRow+i][startCol+j] === num) {
+                    if (board[startRow + i][startCol + j] === num) {
                         return false;
                     }
                 }

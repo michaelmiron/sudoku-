@@ -9,7 +9,7 @@
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
-    background-color: #3498db; /* כחול */
+    background-color: #3498db;
     color: white;
     border: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;

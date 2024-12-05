@@ -7,62 +7,66 @@ import SolveStepButton from './SolveStepButton.jsx';
 import '../Styles/ResetBoard.css';
 import '../Styles/SolveStepButton.css';
 
-
-
-
 const SudokuBoard = () => {
     const generateBoard = () => {
         const board = Array.from({ length: 9 }, () => Array(9).fill(''));
-        fillRandomCells(board);
-        return board;
-    };
-
-    const isInRowOrCol = (board, row, col, num) => {
-        for (let i = 0; i < 9; i++) {
-            if (board[row][i] === num || board[i][col] === num) return true;
-        }
-        return false;
-    };
-
-    const isInSubGrid = (board, row, col, num) => {
-        const startRow = Math.floor(row / 3) * 3;
-        const startCol = Math.floor(col / 3) * 3;
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (board[startRow + i][startCol + j] === num) return true;
+        const emptyCells = [];
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                emptyCells.push([row, col]);
             }
         }
-        return false;
+        fillRandomCells(board, emptyCells);
+        return { board, emptyCells };
     };
 
     const isValidPlacement = (board, row, col, num) => {
-        return !isInRowOrCol(board, row, col, num) && !isInSubGrid(board, row, col, num);
+        const isInRowOrCol = (board[row].includes(num) || board.some(rowArr => rowArr[col] === num));
+        const startRow = Math.floor(row / 3) * 3;
+        const startCol = Math.floor(col / 3) * 3;
+
+        const isInSubGrid = board
+            .slice(startRow, startRow + 3)
+            .some(subRow => subRow.slice(startCol, startCol + 3).includes(num));
+
+        return !isInRowOrCol && !isInSubGrid;
     };
 
-    const fillRandomCells = (board) => {
+    const fillRandomCells = (board, emptyCells) => {
         let filledCells = 0;
-        while (filledCells < 10) {
-            const row = Math.floor(Math.random() * 9);
-            const col = Math.floor(Math.random() * 9);
+        while (filledCells <= 9 && emptyCells.length > 0) {
+            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+            const [row, col] = emptyCells[randomIndex];
             const num = Math.floor(Math.random() * 9) + 1;
-            if (board[row][col] === '' && isValidPlacement(board, row, col, String(num))) {
+
+            if (isValidPlacement(board, row, col, String(num))) {
                 board[row][col] = String(num);
+                emptyCells.splice(randomIndex, 1);
                 filledCells++;
             }
         }
     };
 
-    const findNextCell = (board) => {
-        for (let row = 0; row < 9; row++) {
-            for (let col = 0; col < 9; col++) {
-                if (board[row][col] === '') return [row, col];
-            }
-        }
-        return null;
+    const findNextCell = (emptyCells) => {
+        return emptyCells.length > 0 ? emptyCells[0] : null;
     };
 
-    const [initialBoard, setInitialBoard] = useState(generateBoard());
-    const [board, setBoard] = useState(initialBoard.map((row) => [...row]));
+    const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
+    const [board, setBoard] = useState(initialBoard);
+    const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
+
+    const updateBoard = (row, col, num) => {
+        setBoard((prevBoard) =>
+            prevBoard.map((rowArr, rowIndex) =>
+                rowArr.map((cell, colIndex) =>
+                    rowIndex === row && colIndex === col ? num : cell
+                )
+            )
+        );
+        setEmptyCells((prevEmptyCells) =>
+            prevEmptyCells.filter(([r, c]) => !(r === row && c === col))
+        );
+    };
 
     return (
         <div className="main-container">
@@ -88,15 +92,20 @@ const SudokuBoard = () => {
             </div>
             <div className="button-container mt-4">
                 <ResetBoard
-                    setInitialBoard={setInitialBoard}
+                    setInitialBoard={() => {
+                        const { board, emptyCells } = generateBoard();
+                        setBoard(board);
+                        setEmptyCells(emptyCells);
+                    }}
                     setBoard={setBoard}
                     generateBoard={generateBoard}
                 />
                 <SolveStepButton
                     board={board}
-                    setBoard={setBoard}
-                    findNextCell={findNextCell}
+                    setBoard={updateBoard}
+                    findNextCell={() => findNextCell(emptyCells)}
                     isValidPlacement={isValidPlacement}
+                    setEmptyCells={setEmptyCells}
                 />
             </div>
             <footer className="footer mt-5">

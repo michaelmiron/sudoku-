@@ -1,4 +1,3 @@
-/* הגדרות בסיסיות לגוף ול-HTML */
 html, body {
     height: 100%;
     width: 100%;
@@ -9,10 +8,9 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center; /* שמירה על טקסט ממורכז */
+    text-align: center;
 }
 
-/* מסגרת עמוד */
 .page-frame {
     display: flex;
     flex-direction: column;
@@ -28,7 +26,6 @@ html, body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 118, 117, 0.5);
 }
 
-/* כותרת */
 .custom-title {
     font-size: 3rem;
     font-weight: bold;
@@ -37,7 +34,7 @@ html, body {
     margin-bottom: 10px;
 }
 
-/* כותרת משנית */
+
 .lead {
     font-size: 1.5rem;
     font-weight: 300;
@@ -45,7 +42,7 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* מיכל לוח */
+
 .sudoku-container {
     display: flex;
     justify-content: center;
@@ -70,42 +67,7 @@ html, body {
 
 }
 
-.sudoku-cell {
-    display: flex;
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    background-color: #fff; /* White background for cells */
-    border: 1px solid #ccc; /* Default thin border */
-    font-size: 16px; /* Font size for numbers */
-    font-weight: bold; /* Bold text for numbers */
-    width: 40px; /* Fixed width for cells */
-    height: 40px; /* Fixed height for cells */
-    text-align: center; /* Center text in cells */
-}
 
-/* Add thicker borders for the left edge of sub-grids */
-.subgrid-left {
-    border-left: 2px solid #000;
-}
-
-/* Add thicker borders for the top edge of sub-grids */
-.subgrid-top {
-    border-top: 2px solid #000;
-}
-
-/* Add thicker borders for the right edge of sub-grids */
-.subgrid-right {
-    border-right: 2px solid #000;
-}
-
-/* Add thicker borders for the bottom edge of sub-grids */
-.subgrid-bottom {
-    border-bottom: 2px solid #000;
-}
-
-
-
-/* שדות קלט */
 .cell-input {
     width: 100%;
     height: 100%;
@@ -118,7 +80,6 @@ html, body {
     color: #2d3436;
 }
 
-/* כפתורים */
 .button-container {
     display: flex;
     justify-content: center;
@@ -143,7 +104,7 @@ html, body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* תחתית */
+
 .footer {
     margin-top: 20px;
     font-size: 0.9rem;

@@ -1,10 +1,9 @@
 import React from 'react';
-import SudokuBoard from './SudokuBoard';
+import SudokuBoard from './Components/SudokuBoard.jsx';
 
 const App = () => {
     return (
         <div>
-            <h1>Sudoku Game</h1>
             <SudokuBoard />
         </div>
     );

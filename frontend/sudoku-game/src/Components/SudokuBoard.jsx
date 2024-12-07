@@ -6,7 +6,21 @@ import ResetBoard from './ResetBoard.jsx';
 import SolveStepButton from './SolveStepButton.jsx';
 import '../Styles/ResetBoard.css';
 import '../Styles/SolveStepButton.css';
+import ErrorHandlingInterface from "./ErrorHandlingInterface.jsx";
+/*Key Changes:
+Added backendError State:
 
+backendError holds the error message received from the backend.
+Placed ErrorHandlingInterface Above the Board:
+
+It ensures the error message is displayed prominently to the user.
+Pass Error Message:
+
+backendError is passed as a prop to ErrorHandlingInterface.
+Usage:
+
+When an error occurs, the backend response should update backendError via setBackendError.
+This setup will display error messages above the Sudoku board, styled as defined in ErrorHandlingInterface.css. Let me know if you need help integrating it further!*/
 const SudokuBoard = () => {
     const generateBoard = () => {
         const board = Array.from({ length: 9 }, () => Array(9).fill(''));
@@ -51,10 +65,6 @@ const SudokuBoard = () => {
         return emptyCells.length > 0 ? emptyCells[0] : null;
     };
 
-    const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
-    const [board, setBoard] = useState(initialBoard);
-    const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
-
     const updateBoard = (row, col, num) => {
         setBoard((prevBoard) =>
             prevBoard.map((rowArr, rowIndex) =>
@@ -68,6 +78,16 @@ const SudokuBoard = () => {
         );
     };
 
+    // Test function to simulate backend error
+    const simulateBackendError = () => {
+        setBackendError('This is a simulated backend error message!');
+    };
+
+    const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
+    const [board, setBoard] = useState(initialBoard);
+    const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
+    const [backendError, setBackendError] = useState(''); // Add state for backend errors
+
     return (
         <div className="main-container">
             <div className="header-container">
@@ -76,6 +96,8 @@ const SudokuBoard = () => {
                     Solve Sudoku step-by-step or reset the board.
                 </p>
             </div>
+            {/* Add ErrorHandlingInterface here */}
+            <ErrorHandlingInterface errorMessage={backendError} />
             <div className="sudoku-container">
                 <div className="sudoku-board">
                     {board.map((row, rowIndex) =>
@@ -107,6 +129,13 @@ const SudokuBoard = () => {
                     isValidPlacement={isValidPlacement}
                     setEmptyCells={setEmptyCells}
                 />
+                {/* Button to test error message */}
+                <button
+                    className="btn btn-danger mt-3"
+                    onClick={simulateBackendError}
+                >
+                    Simulate Backend Error
+                </button>
             </div>
             <footer className="footer mt-5">
                 <p className="text-muted">© 2024 Sudoku Pro | By Michael Miron and Eli Alhazov :)</p>

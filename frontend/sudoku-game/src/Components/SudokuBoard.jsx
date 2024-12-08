@@ -7,20 +7,7 @@ import SolveStepButton from './SolveStepButton.jsx';
 import '../Styles/ResetBoard.css';
 import '../Styles/SolveStepButton.css';
 import ErrorHandlingInterface from "./ErrorHandlingInterface.jsx";
-/*Key Changes:
-Added backendError State:
 
-backendError holds the error message received from the backend.
-Placed ErrorHandlingInterface Above the Board:
-
-It ensures the error message is displayed prominently to the user.
-Pass Error Message:
-
-backendError is passed as a prop to ErrorHandlingInterface.
-Usage:
-
-When an error occurs, the backend response should update backendError via setBackendError.
-This setup will display error messages above the Sudoku board, styled as defined in ErrorHandlingInterface.css. Let me know if you need help integrating it further!*/
 const SudokuBoard = () => {
     const generateBoard = () => {
         const board = Array.from({ length: 9 }, () => Array(9).fill(''));

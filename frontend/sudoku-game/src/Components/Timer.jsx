@@ -19,14 +19,25 @@ const Timer = ({ reset }) => {
     }, [isRunning]);
 
     useEffect(() => {
-        setTime(0);
-        setIsRunning(true);
+        handleReset();
     }, [reset]);
+
 
     const formatTime = (seconds) => {
         const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
         const secs = String(seconds % 60).padStart(2, '0');
         return `${minutes}:${secs}`;
+    };
+
+
+    const toggleTimer = () => {
+        setIsRunning(!isRunning);
+    };
+
+
+    const handleReset = () => {
+        setTime(0);
+        setIsRunning(false);
     };
 
     return (
@@ -37,14 +48,14 @@ const Timer = ({ reset }) => {
             <div className="timer-buttons">
                 <button
                     className="btn timer-button pause"
-                    onClick={() => setIsRunning(!isRunning)}
+                    onClick={toggleTimer}
                 >
                     <i className={`bi ${isRunning ? 'bi-pause-fill' : 'bi-play-fill'}`}></i>
                     {isRunning ? 'Pause' : 'Resume'}
                 </button>
                 <button
                     className="btn timer-button reset"
-                    onClick={() => setTime(0)}
+                    onClick={handleReset}
                 >
                     <i className="bi bi-arrow-clockwise"></i> Reset
                 </button>

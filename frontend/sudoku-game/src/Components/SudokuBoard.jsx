@@ -7,8 +7,8 @@ import SolveStepButton from './SolveStepButton.jsx';
 import Timer from './Timer.jsx';
 import '../Styles/ResetBoard.css';
 import '../Styles/SolveStepButton.css';
-import '../Styles/Timer.css'; // משמר את ה-import של קובץ ה-CSS של הטיימר
-import ErrorHandlingInterface from "./ErrorHandlingInterface.jsx"; // משמר את ה-import של ErrorHandlingInterface
+import '../Styles/Timer.css';
+import ErrorHandlingInterface from "./ErrorHandlingInterface.jsx";
 
 const SudokuBoard = () => {
     const generateBoard = () => {
@@ -54,22 +54,25 @@ const SudokuBoard = () => {
         return emptyCells.length > 0 ? emptyCells[0] : null;
     };
 
-    // State initialization
+
     const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
     const [board, setBoard] = useState(initialBoard);
     const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
     const [resetTimer, setResetTimer] = useState(false);
-    const [backendError, setBackendError] = useState(''); // משמר את ה-state לשגיאות מה-backend
+    const [backendError, setBackendError] = useState('');
+    const [comingSoonMessage, setComingSoonMessage] = useState(''); // State for Coming Soon message
 
-    // Function to handle board reset
+
     const handleResetBoard = () => {
         const { board, emptyCells } = generateBoard();
         setBoard(board);
         setEmptyCells(emptyCells);
         setResetTimer((prev) => !prev);
+        setBackendError('');        // Reset backend error
+        setComingSoonMessage('');   // Reset Coming Soon message
     };
 
-    // Function to update the board
+
     const updateBoard = (row, col, num) => {
         setBoard((prevBoard) =>
             prevBoard.map((rowArr, rowIndex) =>
@@ -83,9 +86,10 @@ const SudokuBoard = () => {
         );
     };
 
-    // Test function to simulate backend error
+
     const simulateBackendError = () => {
         setBackendError('This is a simulated backend error message!');
+        setComingSoonMessage('Coming Soon'); // Show Coming Soon message
     };
 
     return (
@@ -97,9 +101,23 @@ const SudokuBoard = () => {
                 </p>
             </div>
 
-            <ErrorHandlingInterface errorMessage={backendError} /> {/* הוספת ErrorHandlingInterface */}
-
             <div className="sudoku-timer-container">
+                <div className="timer-container">
+                    <button
+                        className="btn btn-danger simulate-error-button"
+                        onClick={simulateBackendError}
+                    >
+                        Simulate Backend Error
+                    </button>
+                    <Timer reset={resetTimer} />
+
+                    {comingSoonMessage && (
+                        <div className="alert alert-info text-center coming-soon-alert" role="alert">
+                            <strong>{comingSoonMessage}</strong>
+                        </div>
+                    )}
+                </div>
+
                 <div className="sudoku-container">
                     <div className="sudoku-board">
                         {board.map((row, rowIndex) =>
@@ -114,7 +132,6 @@ const SudokuBoard = () => {
                         )}
                     </div>
                 </div>
-                <Timer reset={resetTimer} />
             </div>
 
             <div className="button-container mt-4">
@@ -130,13 +147,6 @@ const SudokuBoard = () => {
                     isValidPlacement={isValidPlacement}
                     setEmptyCells={setEmptyCells}
                 />
-                {/* Button to test error message */}
-                <button
-                    className="btn btn-danger mt-3"
-                    onClick={simulateBackendError}
-                >
-                    Simulate Backend Error
-                </button>
             </div>
 
             <footer className="footer mt-5">
@@ -144,6 +154,7 @@ const SudokuBoard = () => {
             </footer>
         </div>
     );
+
 };
 
 export default SudokuBoard;

@@ -10,7 +10,7 @@ const SolveStepButton = ({ board, setBoard, findNextCell, isValidPlacement, setE
 
         const [row, col] = nextCell;
 
-        // Try placing a number in the cell
+
         for (let num = 1; num <= 9; num++) {
             if (isValidPlacement(board, row, col, String(num))) {
                 setBoard(row, col, String(num));

@@ -1,4 +1,3 @@
-/* הגדרות בסיסיות לגוף ול-HTML */
 html, body {
     height: 100%;
     width: 100%;
@@ -12,7 +11,7 @@ html, body {
     text-align: center;
 }
 
-/* מסגרת עמוד */
+
 .page-frame {
     display: flex;
     flex-direction: column;
@@ -28,7 +27,7 @@ html, body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 118, 117, 0.5);
 }
 
-/* כותרת */
+
 .custom-title {
     font-size: 3rem;
     font-weight: bold;
@@ -37,7 +36,7 @@ html, body {
     margin-bottom: 10px;
 }
 
-/* כותרת משנית */
+
 .lead {
     font-size: 1.5rem;
     font-weight: 300;
@@ -45,7 +44,7 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* מיכל ללוח ולטיימר */
+
 .sudoku-timer-container {
     display: flex;
     justify-content: center;
@@ -54,7 +53,7 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* מיכל הטיימר */
+
 .timer-container {
     display: flex;
     flex-direction: column;
@@ -69,12 +68,12 @@ html, body {
     position: relative;
 }
 
-/* כפתור Simulate Backend Error */
+
 .simulate-error-button {
-    margin-bottom: 15px;         /* מרווח מתחת לכפתור */
+    margin-bottom: 15px;
     font-size: 1rem;
     padding: 10px 20px;
-    background-color: #dc3545;   /* צבע אדום */
+    background-color: #dc3545;
     color: white;
     border: none;
     border-radius: 5px;
@@ -84,12 +83,12 @@ html, body {
 }
 
 .simulate-error-button:hover {
-    background-color: #c82333;   /* צבע אדום כהה בעת מעבר עכבר */
+    background-color: #c82333;
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* תצוגת הטיימר */
+
 .timer-display {
     font-size: 1.5rem;
     font-weight: bold;
@@ -100,16 +99,16 @@ html, body {
     width: 100%;
 }
 
-/* כפתורי הטיימר */
+
 .timer-buttons {
     display: flex;
     gap: 10px;
     justify-content: center;
 }
 
-/* הודעת Coming Soon */
+
 .coming-soon-alert {
-    margin-top: 15px;            /* מרווח מעל ההודעה */
+    margin-top: 15px;
     font-size: 1rem;
     padding: 10px 20px;
     border-radius: 10px;
@@ -117,7 +116,7 @@ html, body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* מיכל הלוח */
+
 .sudoku-container {
     display: flex;
     justify-content: center;
@@ -131,7 +130,7 @@ html, body {
     max-width: 90vw;
 }
 
-/* עיצוב הלוח */
+
 .sudoku-board {
     display: grid;
     grid-template-rows: repeat(9, 40px);
@@ -140,7 +139,7 @@ html, body {
     background-color: #000;
 }
 
-/* כפתורים ראשיים */
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -165,7 +164,7 @@ html, body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* תחתית */
+
 .footer {
     margin-top: 20px;
     font-size: 0.9rem;

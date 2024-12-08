@@ -1,3 +1,4 @@
+/* הגדרות בסיסיות לגוף ול-HTML */
 html, body {
     height: 100%;
     width: 100%;
@@ -11,6 +12,7 @@ html, body {
     text-align: center;
 }
 
+/* מסגרת עמוד */
 .page-frame {
     display: flex;
     flex-direction: column;
@@ -26,6 +28,7 @@ html, body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 118, 117, 0.5);
 }
 
+/* כותרת */
 .custom-title {
     font-size: 3rem;
     font-weight: bold;
@@ -34,7 +37,7 @@ html, body {
     margin-bottom: 10px;
 }
 
-
+/* כותרת משנית */
 .lead {
     font-size: 1.5rem;
     font-weight: 300;
@@ -42,12 +45,20 @@ html, body {
     margin-bottom: 20px;
 }
 
+/* מיכל ללוח ולטיימר */
+.sudoku-timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* מרווח בין הלוח לטיימר */
+    margin-bottom: 20px;
+}
 
+/* מיכל לוח */
 .sudoku-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     background-color: #fff;
     border-radius: 10px;
     border: 2px solid #333;
@@ -55,19 +66,18 @@ html, body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     width: fit-content;
     max-width: 90vw;
-    margin: auto;
 }
 
+/* עיצוב הלוח */
 .sudoku-board {
     display: grid;
     grid-template-rows: repeat(9, 40px);
     grid-template-columns: repeat(9, 40px);
     gap: 0;
     background-color: #000;
-
 }
 
-
+/* שדות קלט */
 .cell-input {
     width: 100%;
     height: 100%;
@@ -80,6 +90,7 @@ html, body {
     color: #2d3436;
 }
 
+/* כפתורים */
 .button-container {
     display: flex;
     justify-content: center;
@@ -104,15 +115,74 @@ html, body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* עיצוב הטיימר */
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 180px;
+}
 
+/* תצוגת הטיימר */
+.timer-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* כפתורי הטיימר */
+.timer-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* עיצוב כפתורי הטיימר */
+.timer-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 45px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* כפתור Pause עם עיצוב ייחודי */
+.timer-button.pause {
+    background-color: #28a745; /* ירוק */
+}
+
+/* כפתור Reset עם עיצוב ייחודי */
+.timer-button.reset {
+    background-color: #dc3545; /* אדום */
+}
+
+/* אפקט מעבר לכפתורים */
+.timer-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* תחתית */
 .footer {
     margin-top: 20px;
     font-size: 0.9rem;
     color: #636e72;
 }
-
-
-
-
-
-

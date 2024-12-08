@@ -1,0 +1,113 @@
+/* מיכל ללוח ולטיימר */
+.sudoku-timer-container {
+    position: relative;         /* מיקום יחסי לשמירה על הלוח במרכז */
+    display: inline-block;      /* מוודא שהמיכל תואם לגודל הלוח */
+}
+
+/* מיכל הלוח */
+.sudoku-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 3px solid #333;
+    padding: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    max-width: 90vw;
+    transition: box-shadow 0.3s ease;
+}
+
+.sudoku-container:hover {
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+
+.timer-container {
+    position: absolute;
+    right: -240px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timer-container:hover {
+    transform: translateY(-52%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* תצוגת הטיימר */
+.timer-display {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* כפתורי הטיימר */
+.timer-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* עיצוב כפתור משודרג עבור Pause/Resume ו-Reset */
+.timer-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(135deg, #4a90e2, #357abd); /* גרדיאנט כחול */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* אפקט hover לכפתור */
+.timer-button:hover {
+    background: linear-gradient(135deg, #357abd, #2a5d9c);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* אייקונים בתוך הכפתור */
+.timer-button i {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+/* כפתור Reset */
+.timer-button.reset {
+    background: linear-gradient(135deg, #6c757d, #5a6268); /* גרדיאנט אפור */
+}
+
+.timer-button.reset:hover {
+    background: linear-gradient(135deg, #5a6268, #495057);
+}
+
+/* כפתור Pause/Resume */
+.timer-button.pause {
+    background: linear-gradient(135deg, #4a90e2, #357abd); /* גרדיאנט כחול */
+}
+
+.timer-button.pause:hover {
+    background: linear-gradient(135deg, #357abd, #2a5d9c);
+}

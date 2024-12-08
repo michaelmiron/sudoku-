@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SudokuCell from './sudokuCell.jsx';
 import ResetBoard from './ResetBoard.jsx';
 import SolveStepButton from './SolveStepButton.jsx';
+import Timer from './Timer.jsx';
 import '../Styles/ResetBoard.css';
 import '../Styles/SolveStepButton.css';
+import '../Styles/Timer.css';
 
 const SudokuBoard = () => {
     const generateBoard = () => {
@@ -54,6 +56,14 @@ const SudokuBoard = () => {
     const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
     const [board, setBoard] = useState(initialBoard);
     const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
+    const [resetTimer, setResetTimer] = useState(false);
+
+    const handleResetBoard = () => {
+        const { board, emptyCells } = generateBoard();
+        setBoard(board);
+        setEmptyCells(emptyCells);
+        setResetTimer((prev) => !prev);
+    };
 
     const updateBoard = (row, col, num) => {
         setBoard((prevBoard) =>
@@ -76,27 +86,28 @@ const SudokuBoard = () => {
                     Solve Sudoku step-by-step or reset the board.
                 </p>
             </div>
-            <div className="sudoku-container">
-                <div className="sudoku-board">
-                    {board.map((row, rowIndex) =>
-                        row.map((cell, colIndex) => (
-                            <SudokuCell
-                                key={`${rowIndex}-${colIndex}`}
-                                cell={cell}
-                                rowIndex={rowIndex}
-                                colIndex={colIndex}
-                            />
-                        ))
-                    )}
+
+            <div className="sudoku-timer-container">
+                <div className="sudoku-container">
+                    <div className="sudoku-board">
+                        {board.map((row, rowIndex) =>
+                            row.map((cell, colIndex) => (
+                                <SudokuCell
+                                    key={`${rowIndex}-${colIndex}`}
+                                    cell={cell}
+                                    rowIndex={rowIndex}
+                                    colIndex={colIndex}
+                                />
+                            ))
+                        )}
+                    </div>
                 </div>
+                <Timer reset={resetTimer} />
             </div>
+
             <div className="button-container mt-4">
                 <ResetBoard
-                    setInitialBoard={() => {
-                        const { board, emptyCells } = generateBoard();
-                        setBoard(board);
-                        setEmptyCells(emptyCells);
-                    }}
+                    setInitialBoard={handleResetBoard}
                     setBoard={setBoard}
                     generateBoard={generateBoard}
                 />
@@ -108,6 +119,7 @@ const SudokuBoard = () => {
                     setEmptyCells={setEmptyCells}
                 />
             </div>
+
             <footer className="footer mt-5">
                 <p className="text-muted">© 2024 Sudoku Pro | By Michael Miron and Eli Alhazov :)</p>
             </footer>

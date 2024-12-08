@@ -7,7 +7,8 @@ import SolveStepButton from './SolveStepButton.jsx';
 import Timer from './Timer.jsx';
 import '../Styles/ResetBoard.css';
 import '../Styles/SolveStepButton.css';
-import '../Styles/Timer.css';
+import '../Styles/Timer.css'; // משמר את ה-import של קובץ ה-CSS של הטיימר
+import ErrorHandlingInterface from "./ErrorHandlingInterface.jsx"; // משמר את ה-import של ErrorHandlingInterface
 
 const SudokuBoard = () => {
     const generateBoard = () => {
@@ -53,11 +54,14 @@ const SudokuBoard = () => {
         return emptyCells.length > 0 ? emptyCells[0] : null;
     };
 
+    // State initialization
     const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
     const [board, setBoard] = useState(initialBoard);
     const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
     const [resetTimer, setResetTimer] = useState(false);
+    const [backendError, setBackendError] = useState(''); // משמר את ה-state לשגיאות מה-backend
 
+    // Function to handle board reset
     const handleResetBoard = () => {
         const { board, emptyCells } = generateBoard();
         setBoard(board);
@@ -65,6 +69,7 @@ const SudokuBoard = () => {
         setResetTimer((prev) => !prev);
     };
 
+    // Function to update the board
     const updateBoard = (row, col, num) => {
         setBoard((prevBoard) =>
             prevBoard.map((rowArr, rowIndex) =>
@@ -78,6 +83,11 @@ const SudokuBoard = () => {
         );
     };
 
+    // Test function to simulate backend error
+    const simulateBackendError = () => {
+        setBackendError('This is a simulated backend error message!');
+    };
+
     return (
         <div className="main-container">
             <div className="header-container">
@@ -86,6 +96,8 @@ const SudokuBoard = () => {
                     Solve Sudoku step-by-step or reset the board.
                 </p>
             </div>
+
+            <ErrorHandlingInterface errorMessage={backendError} /> {/* הוספת ErrorHandlingInterface */}
 
             <div className="sudoku-timer-container">
                 <div className="sudoku-container">
@@ -118,6 +130,13 @@ const SudokuBoard = () => {
                     isValidPlacement={isValidPlacement}
                     setEmptyCells={setEmptyCells}
                 />
+                {/* Button to test error message */}
+                <button
+                    className="btn btn-danger mt-3"
+                    onClick={simulateBackendError}
+                >
+                    Simulate Backend Error
+                </button>
             </div>
 
             <footer className="footer mt-5">

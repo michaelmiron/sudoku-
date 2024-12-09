@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SudokuCell from './sudokuCell.jsx';
 import ResetBoard from './ResetBoard.jsx';
 import SolveStepButton from './SolveStepButton.jsx';
+import Timer from './Timer.jsx';
 import '../Styles/ResetBoard.css';
 import '../Styles/SolveStepButton.css';
+import '../Styles/Timer.css';
 import ErrorHandlingInterface from "./ErrorHandlingInterface.jsx";
 
 const SudokuBoard = () => {
@@ -52,6 +54,25 @@ const SudokuBoard = () => {
         return emptyCells.length > 0 ? emptyCells[0] : null;
     };
 
+
+    const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
+    const [board, setBoard] = useState(initialBoard);
+    const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
+    const [resetTimer, setResetTimer] = useState(false);
+    const [backendError, setBackendError] = useState('');
+    const [comingSoonMessage, setComingSoonMessage] = useState(''); // State for Coming Soon message
+
+
+    const handleResetBoard = () => {
+        const { board, emptyCells } = generateBoard();
+        setBoard(board);
+        setEmptyCells(emptyCells);
+        setResetTimer((prev) => !prev);
+        setBackendError('');        // Reset backend error
+        setComingSoonMessage('');   // Reset Coming Soon message
+    };
+
+
     const updateBoard = (row, col, num) => {
         setBoard((prevBoard) =>
             prevBoard.map((rowArr, rowIndex) =>
@@ -65,15 +86,11 @@ const SudokuBoard = () => {
         );
     };
 
-    // Test function to simulate backend error
+
     const simulateBackendError = () => {
         setBackendError('This is a simulated backend error message!');
+        setComingSoonMessage('Coming Soon'); // Show Coming Soon message
     };
-
-    const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
-    const [board, setBoard] = useState(initialBoard);
-    const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
-    const [backendError, setBackendError] = useState(''); // Add state for backend errors
 
     return (
         <div className="main-container">
@@ -83,29 +100,43 @@ const SudokuBoard = () => {
                     Solve Sudoku step-by-step or reset the board.
                 </p>
             </div>
-            {/* Add ErrorHandlingInterface here */}
-            <ErrorHandlingInterface errorMessage={backendError} />
-            <div className="sudoku-container">
-                <div className="sudoku-board">
-                    {board.map((row, rowIndex) =>
-                        row.map((cell, colIndex) => (
-                            <SudokuCell
-                                key={`${rowIndex}-${colIndex}`}
-                                cell={cell}
-                                rowIndex={rowIndex}
-                                colIndex={colIndex}
-                            />
-                        ))
+
+            <div className="sudoku-timer-container">
+                <div className="timer-container">
+                    <button
+                        className="btn btn-danger simulate-error-button"
+                        onClick={simulateBackendError}
+                    >
+                        Simulate Backend Error
+                    </button>
+                    <Timer reset={resetTimer} />
+
+                    {comingSoonMessage && (
+                        <div className="alert alert-info text-center coming-soon-alert" role="alert">
+                            <strong>{comingSoonMessage}</strong>
+                        </div>
                     )}
                 </div>
+
+                <div className="sudoku-container">
+                    <div className="sudoku-board">
+                        {board.map((row, rowIndex) =>
+                            row.map((cell, colIndex) => (
+                                <SudokuCell
+                                    key={`${rowIndex}-${colIndex}`}
+                                    cell={cell}
+                                    rowIndex={rowIndex}
+                                    colIndex={colIndex}
+                                />
+                            ))
+                        )}
+                    </div>
+                </div>
             </div>
+
             <div className="button-container mt-4">
                 <ResetBoard
-                    setInitialBoard={() => {
-                        const { board, emptyCells } = generateBoard();
-                        setBoard(board);
-                        setEmptyCells(emptyCells);
-                    }}
+                    setInitialBoard={handleResetBoard}
                     setBoard={setBoard}
                     generateBoard={generateBoard}
                 />
@@ -116,19 +147,14 @@ const SudokuBoard = () => {
                     isValidPlacement={isValidPlacement}
                     setEmptyCells={setEmptyCells}
                 />
-                {/* Button to test error message */}
-                <button
-                    className="btn btn-danger mt-3"
-                    onClick={simulateBackendError}
-                >
-                    Simulate Backend Error
-                </button>
             </div>
+
             <footer className="footer mt-5">
                 <p className="text-muted">© 2024 Sudoku Pro | By Michael Miron and Eli Alhazov :)</p>
             </footer>
         </div>
     );
+
 };
 
 export default SudokuBoard;

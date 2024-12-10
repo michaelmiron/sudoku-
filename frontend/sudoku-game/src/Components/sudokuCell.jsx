@@ -1,21 +1,21 @@
 import React from 'react';
 import '../Styles/SudokuCells.css';
 
-
 const renderCellContent = (cell, rowIndex, colIndex, handleInputChange) => {
-    if (cell === '') {
-        return (
-            <input
-                className="cell-input"
-                type="text"
-                maxLength="1"
-                onChange={(e) =>
-                    handleInputChange(rowIndex, colIndex, e.target.value)
+    return (
+        <input
+            className="cell-input"
+            type="text"
+            maxLength="1"
+            value={cell}
+            onChange={(e) => {
+                const value = e.target.value;
+                if (value === '' || /^[1-9]$/.test(value)) {
+                    handleInputChange(rowIndex, colIndex, value);
                 }
-            />
-        );
-    }
-    return cell;
+            }}
+        />
+    );
 };
 
 const SudokuCell = ({ cell, rowIndex, colIndex, handleInputChange }) => {

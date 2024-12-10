@@ -60,7 +60,7 @@ const SudokuBoard = () => {
     const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
     const [resetTimer, setResetTimer] = useState(false);
     const [backendError, setBackendError] = useState('');
-    const [comingSoonMessage, setComingSoonMessage] = useState(''); // State for Coming Soon message
+    const [comingSoonMessage, setComingSoonMessage] = useState('');
 
 
     const handleResetBoard = () => {
@@ -68,28 +68,57 @@ const SudokuBoard = () => {
         setBoard(board);
         setEmptyCells(emptyCells);
         setResetTimer((prev) => !prev);
-        setBackendError('');        // Reset backend error
-        setComingSoonMessage('');   // Reset Coming Soon message
+        setBackendError('');
+        setComingSoonMessage('');
     };
 
 
-    const updateBoard = (row, col, num) => {
-        setBoard((prevBoard) =>
-            prevBoard.map((rowArr, rowIndex) =>
-                rowArr.map((cell, colIndex) =>
-                    rowIndex === row && colIndex === col ? num : cell
-                )
+    const updateBoard = async (row, col, num) => {
+        const newBoard = board.map((rowArr, rowIndex) =>
+            rowArr.map((cell, colIndex) =>
+                rowIndex === row && colIndex === col ? num : cell
             )
         );
+
+        setBoard(newBoard);
         setEmptyCells((prevEmptyCells) =>
             prevEmptyCells.filter(([r, c]) => !(r === row && c === col))
         );
+
+
+        try {
+            const params = new URLSearchParams();
+            newBoard.forEach((row, rowIndex) => {
+                const formattedRow = row.map(cell => (cell === '' ? '0' : cell)).join(',');
+                console.log(`Row ${rowIndex + 1}:`, formattedRow);
+                params.append('board', formattedRow);
+            });
+
+            const requestUrl = `http://127.0.0.1:8000/check_board/validate/?${params}`;
+            console.log('Request URL:', requestUrl);
+
+            const response = await fetch(requestUrl);
+            const data = await response.json();
+
+            console.log('Response from backend:', data);
+
+            if (!data.valid) {
+                setBackendError(`Error: ${data.error}`);
+            } else {
+                setBackendError('');
+            }
+        } catch (error) {
+            console.error('Error validating board:', error);
+            setBackendError('Error communicating with the backend.');
+        }
     };
+
+
 
 
     const simulateBackendError = () => {
         setBackendError('This is a simulated backend error message!');
-        setComingSoonMessage('Coming Soon'); // Show Coming Soon message
+        setComingSoonMessage('Coming Soon');
     };
 
     return (
@@ -127,10 +156,18 @@ const SudokuBoard = () => {
                                     cell={cell}
                                     rowIndex={rowIndex}
                                     colIndex={colIndex}
+                                    handleInputChange={updateBoard}
                                 />
                             ))
                         )}
                     </div>
+
+
+                    {backendError && (
+                        <div className="alert alert-danger mt-3">
+                            {backendError}
+                        </div>
+                    )}
                 </div>
             </div>
 

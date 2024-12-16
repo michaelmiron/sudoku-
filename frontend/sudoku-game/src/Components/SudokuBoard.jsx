@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import '../Styles/SudokuBoard.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SudokuCell from './sudokuCell.jsx';
+import SudokuCell from './SudokuCell.jsx';
 import ResetBoard from './ResetBoard.jsx';
 import SolveStepButton from './SolveStepButton.jsx';
 import Timer from './Timer.jsx';
@@ -11,8 +11,9 @@ import '../Styles/Timer.css';
 import ErrorHandlingInterface from "./ErrorHandlingInterface.jsx";
 
 const SudokuBoard = () => {
+
     const generateBoard = () => {
-        const board = Array.from({ length: 9 }, () => Array(9).fill(''));
+        const board = Array(9).fill(null).map(() => Array(9).fill(''));
         const emptyCells = [];
         for (let row = 0; row < 9; row++) {
             for (let col = 0; col < 9; col++) {
@@ -20,24 +21,12 @@ const SudokuBoard = () => {
             }
         }
         fillRandomCells(board, emptyCells);
-        return { board, emptyCells };
-    };
-
-    const isValidPlacement = (board, row, col, num) => {
-        const isInRowOrCol = (board[row].includes(num) || board.some(rowArr => rowArr[col] === num));
-        const startRow = Math.floor(row / 3) * 3;
-        const startCol = Math.floor(col / 3) * 3;
-
-        const isInSubGrid = board
-            .slice(startRow, startRow + 3)
-            .some(subRow => subRow.slice(startCol, startCol + 3).includes(num));
-
-        return !isInRowOrCol && !isInSubGrid;
+        return {board, emptyCells};
     };
 
     const fillRandomCells = (board, emptyCells) => {
         let filledCells = 0;
-        while (filledCells <= 9 && emptyCells.length > 0) {
+        while (filledCells <= 22 && emptyCells.length > 0) {
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             const [row, col] = emptyCells[randomIndex];
             const num = Math.floor(Math.random() * 9) + 1;
@@ -50,76 +39,133 @@ const SudokuBoard = () => {
         }
     };
 
-    const findNextCell = (emptyCells) => {
-        return emptyCells.length > 0 ? emptyCells[0] : null;
+    const isValidPlacement = (board, row, col, num) => {
+
+        for (let c = 0; c < 9; c++) {
+            if (c !== col && board[row][c] === num) {
+                return false; // Number already exists in the row
+            }
+        }
+
+        for (let r = 0; r < 9; r++) {
+            if (r !== row && board[r][col] === num) {
+                return false;
+            }
+        }
+
+        const startRow = Math.floor(row / 3) * 3;
+        const startCol = Math.floor(col / 3) * 3;
+
+        let isInSubGrid = false;
+        for (let i = startRow; i < startRow + 3; i++) {
+            for (let j = startCol; j < startCol + 3; j++) {
+                if (i === row && j === col) continue;
+                if (board[i][j] === num) {
+                    isInSubGrid = true;
+                    break;
+                }
+            }
+            if (isInSubGrid) break;
+        }
+
+        return !isInSubGrid;
     };
-
-
-    const { board: initialBoard, emptyCells: initialEmptyCells } = generateBoard();
-    const [board, setBoard] = useState(initialBoard);
-    const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
-    const [resetTimer, setResetTimer] = useState(false);
-    const [backendError, setBackendError] = useState('');
-    const [comingSoonMessage, setComingSoonMessage] = useState('');
-
-
-    const handleResetBoard = () => {
-        const { board, emptyCells } = generateBoard();
-        setBoard(board);
-        setEmptyCells(emptyCells);
-        setResetTimer((prev) => !prev);
-        setBackendError('');
-        setComingSoonMessage('');
-    };
-
 
     const updateBoard = async (row, col, num) => {
+        const isValidInput = /^[1-9]$/.test(num) || num === "";
+
+        if (!isValidInput) {
+            return; // Do nothing if the input is invalid
+        }
+
         const newBoard = board.map((rowArr, rowIndex) =>
             rowArr.map((cell, colIndex) =>
                 rowIndex === row && colIndex === col ? num : cell
             )
         );
 
+        // Check if the placement is valid
+        const isPlacementValid = isValidPlacement(newBoard, row, col, num);
+
+        // Increment mistakes only if the placement is invalid and the input is not empty
+        if (!isPlacementValid && num !== "") {
+            setMistakes((prevMistakes) => prevMistakes + 1);
+        }
+
         setBoard(newBoard);
+
         setEmptyCells((prevEmptyCells) =>
             prevEmptyCells.filter(([r, c]) => !(r === row && c === col))
         );
 
-
         try {
             const params = new URLSearchParams();
             newBoard.forEach((row, rowIndex) => {
-                const formattedRow = row.map(cell => (cell === '' ? '0' : cell)).join(',');
-                console.log(`Row ${rowIndex + 1}:`, formattedRow);
-                params.append('board', formattedRow);
+                const formattedRow = row.map((cell) => (cell === "" ? "0" : cell)).join(",");
+                params.append("board", formattedRow);
             });
 
             const requestUrl = `http://127.0.0.1:8000/check_board/validate/?${params}`;
-            console.log('Request URL:', requestUrl);
-
             const response = await fetch(requestUrl);
             const data = await response.json();
-
-            console.log('Response from backend:', data);
 
             if (!data.valid) {
                 setBackendError(`Error: ${data.error}`);
             } else {
-                setBackendError('');
+                setBackendError("");
             }
         } catch (error) {
-            console.error('Error validating board:', error);
-            setBackendError('Error communicating with the backend.');
+            console.error("Error validating board:", error);
+            setBackendError("Error communicating with the backend.");
         }
     };
 
+    const handleEndGame = async () => {
+        const timerElement = document.querySelector('.timer-display');
+        const timePlayed = timerElement ? timerElement.textContent : '00:00';
 
+        try {
+            const formData = new FormData();
+            formData.append('time_played', timePlayed);
+            formData.append('number_of_mistakes', mistakes);
 
+            const response = await fetch('http://127.0.0.1:8000/check_board/save_game/', {
+                method: 'POST',
+                body: formData,
+            });
 
-    const simulateBackendError = () => {
-        setBackendError('This is a simulated backend error message!');
-        setComingSoonMessage('Coming Soon');
+            const data = await response.json();
+
+            if (!data.success) {
+                setBackendError(`Error: ${data.error}`);
+            } else {
+                alert(`Game ${data.game_number} saved successfully!`);
+            }
+        } catch (error) {
+            alert(`An error occurred while saving the game: ${error.message}`);
+        }
     };
+
+    const handleResetBoard = () => {
+        const {board, emptyCells} = generateBoard();
+        setBoard(board);
+        setEmptyCells(emptyCells);
+        setResetTimer((prev) => !prev);
+        setBackendError('');
+        setMistakes(0); // Reset mistakes
+    };
+
+    const findNextCell = (emptyCells) => {
+        return emptyCells.length > 0 ? emptyCells[0] : null;
+    };
+
+    const {board: initialBoard, emptyCells: initialEmptyCells} = generateBoard();
+    const [board, setBoard] = useState(initialBoard);
+    const [emptyCells, setEmptyCells] = useState(initialEmptyCells);
+    const [resetTimer, setResetTimer] = useState(false);
+    const [backendError, setBackendError] = useState('');
+    const [mistakes, setMistakes] = useState(0);
+
 
     return (
         <div className="main-container">
@@ -129,22 +175,14 @@ const SudokuBoard = () => {
                     Solve Sudoku step-by-step or reset the board.
                 </p>
             </div>
+            <div className="mistakes-container">
+                <p>Total Mistakes: {mistakes}</p>
+            </div>
 
             <div className="sudoku-timer-container">
                 <div className="timer-container">
-                    <button
-                        className="btn btn-danger simulate-error-button"
-                        onClick={simulateBackendError}
-                    >
-                        Simulate Backend Error
-                    </button>
-                    <Timer reset={resetTimer} />
+                    <Timer reset={resetTimer}/>
 
-                    {comingSoonMessage && (
-                        <div className="alert alert-info text-center coming-soon-alert" role="alert">
-                            <strong>{comingSoonMessage}</strong>
-                        </div>
-                    )}
                 </div>
 
                 <div className="sudoku-container">
@@ -184,6 +222,12 @@ const SudokuBoard = () => {
                     isValidPlacement={isValidPlacement}
                     setEmptyCells={setEmptyCells}
                 />
+                <button
+                    className="btn btn-success end-game-button"
+                    onClick={handleEndGame}
+                >
+                    End Game
+                </button>
             </div>
 
             <footer className="footer mt-5">

@@ -75,7 +75,7 @@ const SudokuBoard = () => {
         const isValidInput = /^[1-9]$/.test(num) || num === "";
 
         if (!isValidInput) {
-            return; // Do nothing if the input is invalid
+            return;
         }
 
         const newBoard = board.map((rowArr, rowIndex) =>
@@ -84,10 +84,8 @@ const SudokuBoard = () => {
             )
         );
 
-        // Check if the placement is valid
         const isPlacementValid = isValidPlacement(newBoard, row, col, num);
 
-        // Increment mistakes only if the placement is invalid and the input is not empty
         if (!isPlacementValid && num !== "") {
             setMistakes((prevMistakes) => prevMistakes + 1);
         }
@@ -99,14 +97,18 @@ const SudokuBoard = () => {
         );
 
         try {
+
             const params = new URLSearchParams();
-            newBoard.forEach((row, rowIndex) => {
+            newBoard.forEach((row) => {
                 const formattedRow = row.map((cell) => (cell === "" ? "0" : cell)).join(",");
                 params.append("board", formattedRow);
             });
 
-            const requestUrl = `http://127.0.0.1:8000/check_board/validate/?${params}`;
-            const response = await fetch(requestUrl);
+            const requestUrl = `/check_board/validate/?${params.toString()}`;
+            const response = await fetch(requestUrl, {
+                method: 'GET',
+            });
+
             const data = await response.json();
 
             if (!data.valid) {
@@ -115,7 +117,6 @@ const SudokuBoard = () => {
                 setBackendError("");
             }
         } catch (error) {
-            console.error("Error validating board:", error);
             setBackendError("Error communicating with the backend.");
         }
     };
@@ -129,7 +130,7 @@ const SudokuBoard = () => {
             formData.append('time_played', timePlayed);
             formData.append('number_of_mistakes', mistakes);
 
-            const response = await fetch('http://127.0.0.1:8000/check_board/save_game/', {
+            const response = await fetch('/check_board/save_game/', {
                 method: 'POST',
                 body: formData,
             });
@@ -140,6 +141,7 @@ const SudokuBoard = () => {
                 setBackendError(`Error: ${data.error}`);
             } else {
                 alert(`Game ${data.game_number} saved successfully!`);
+
             }
         } catch (error) {
             alert(`An error occurred while saving the game: ${error.message}`);

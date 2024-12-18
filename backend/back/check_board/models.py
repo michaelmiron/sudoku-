@@ -1,7 +1,7 @@
 from django.db import models
 
 class CheckBoard(models.Model):
-    game_number = models.IntegerField()
+    game_number = models.AutoField(primary_key=True)
     time_played = models.CharField(max_length=255)
     number_of_mistakes = models.IntegerField()
 

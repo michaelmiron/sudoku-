@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
 from .models import CheckBoard
 
 
@@ -12,17 +13,15 @@ def save_game(request):
         if not time_played or not number_of_mistakes:
             return JsonResponse({'success': False, 'error': 'Missing required fields.'})
 
-        last_game = CheckBoard.objects.last()
-        game_number = last_game.game_number + 1 if last_game else 1
+
 
         game = CheckBoard(
-            game_number=game_number,
             time_played=time_played,
             number_of_mistakes=int(number_of_mistakes)
         )
         game.save()
 
-        return JsonResponse({'success': True, 'message': 'Game data saved successfully!', 'game_number': game_number})
+        return JsonResponse({'success': True, 'message': 'Game data saved successfully!'})
 
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})

@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-=z@$(bz^kfli1#lvf388_1_xt13scb*rk9v(5pbtv9c=nt!p1#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -38,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'check_board',
-    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -73,14 +72,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'back.wsgi.application'
 
 
-
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sudoku',
+        'USER': 'root',
+        'PASSWORD': 'Michael1!',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
+
 }
 
 
@@ -127,6 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+

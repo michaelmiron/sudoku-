@@ -19,9 +19,10 @@ const Timer = ({ reset }) => {
     }, [isRunning]);
 
     useEffect(() => {
-        handleReset();
+        if (reset) {
+            handleReset();
+        }
     }, [reset]);
-
 
     const formatTime = (seconds) => {
         const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
@@ -29,15 +30,13 @@ const Timer = ({ reset }) => {
         return `${minutes}:${secs}`;
     };
 
-
     const toggleTimer = () => {
-        setIsRunning(!isRunning);
+        setIsRunning((prev) => !prev);
     };
-
 
     const handleReset = () => {
         setTime(0);
-        setIsRunning(false);
+        setIsRunning(true);
     };
 
     return (

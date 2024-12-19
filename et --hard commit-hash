@@ -1,0 +1,270 @@
+[33mcommit 0541892b1826f88f96a2c2d4fb94d63decce625e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32m9-unit-testing-for-frontend[m[33m)[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Thu Dec 19 22:11:17 2024 +0200
+
+    add unit tests for SudokuBoard, ErrorHandlingInterface, and Timer components using Vitest and DOM
+    
+    - Implemented tests for SudokuBoard component to ensure functionality for cell updates, board reset, and end game handling.
+    - Added error handling verification in ErrorHandlingInterface.
+    - Verified Timer reset functionality and integration.
+    - Utilized Vitest and Testing Library for comprehensive DOM-based testing.
+
+[33mcommit d03d88fd0e89551ce6fcf3c79382b5da20db5026[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31morigin/9-unit-testing-for-frontend[m[33m, [m[1;32mmain[m[33m)[m
+Merge: c4e02da 679dacd
+Author: michael_miron <micha767a@gmail.com>
+Date:   Wed Dec 18 13:08:27 2024 +0000
+
+    Merge branch '7-record-errors-database' into 'main'
+    
+    backend setup with the option of saving game info into database it includes ...
+    
+    Closes #7
+    
+    See merge request sapir-collage/sodoku!8
+
+[33mcommit 679dacd27c3b1557469db8c1acbd8d51ab41137f[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Wed Dec 18 14:18:20 2024 +0200
+
+    fixed the comments
+
+[33mcommit 7af96a4e974226729bd72b9dba4e0075182a48af[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Wed Dec 18 14:18:06 2024 +0200
+
+    fixed the comments
+
+[33mcommit fbc5b8cf070714ec3f6d0e9d19319ebd06f30790[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Tue Dec 17 16:44:10 2024 +0200
+
+    added a proxy and change the update board url without django full url ->http://127.0.0.1:8000... as it was previously that i was need to specify the full url also in the handle game end i did the same
+
+[33mcommit 981ba6cdc582296200678b941ab3f0368ed6afe5[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Mon Dec 16 19:20:17 2024 +0200
+
+    added a handle end game function to save the final state of the game via sending the data to the back end .
+    and button to suggest the user to finish the game .
+
+[33mcommit be3b77a7140d45279e9b06128d25cb9d2c6f073b[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Sat Dec 14 19:08:04 2024 +0200
+
+    change name of the file to upper case also deleted dup from setting.py and index.html just a code refactor ctrl+alt+l by mistake...
+
+[33mcommit 304fa21dde57cb1da48a0fadb3c055cbec659b35[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Thu Dec 12 18:46:57 2024 +0200
+
+    backend setup with the option of saving game info into database it includes  total number of mistakes and time played
+
+[33mcommit 1a6291fbf4543c28590eca48f08d834f6127ba62[m
+Merge: c91cc37 c4e02da
+Author: michael_miron <micha767a@gmail.com>
+Date:   Wed Dec 11 13:14:29 2024 +0200
+
+    merging the approved branch into my
+
+[33mcommit c91cc3723d968240c6cd6473ce3daa786fe65029[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Wed Dec 11 13:13:06 2024 +0200
+
+    saving the basic before marge into branch
+
+[33mcommit 8b517a8c5ab6e28ba80485bd0ddf62b0d7d015b3[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Wed Dec 11 12:54:30 2024 +0200
+
+    saving the basic before marge into branch
+
+[33mcommit c4e02da3f3a7e23fa188f9ca5d8a638581a63608[m
+Merge: 4a70cd2 55708da
+Author: Eli Alhazov <elialhazov20@gmail.com>
+Date:   Tue Dec 10 18:23:36 2024 +0000
+
+    Merge branch '6-implement-number-validation' into 'main'
+    
+    Develop server-side functions to validate numbers according to Sudoku rules.
+    
+    See merge request sapir-collage/sodoku!7
+
+[33mcommit 55708da4e080e3b1996902765232b04dc68c99c0[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Tue Dec 10 19:42:21 2024 +0200
+
+    Remove __pycache__ folders from Git tracking
+
+[33mcommit e33a6010003523ed7aee400402eb5b9aefe263a6[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Tue Dec 10 19:38:25 2024 +0200
+
+    Remove __pycache__ folders and add to .gitignore
+
+[33mcommit ebbdb05469810cdfda2812316d25966292738f8e[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Tue Dec 10 19:28:12 2024 +0200
+
+    delete dbsqlite3 file and remove all pycache from git control and add to gitignore
+
+[33mcommit 8684b5180656d8ce2985d60a11badef30d50d3b9[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Tue Dec 10 16:20:23 2024 +0200
+
+    Develop server-side functions to validate numbers according to Sudoku rules.
+    Ensure checks for rows, columns, and sub-grids.
+
+[33mcommit 4a70cd2d70b7fd853ef13946335855be31cc1ba5[m
+Merge: 30ed132 5b29d1b
+Author: Eli Alhazov <elialhazov20@gmail.com>
+Date:   Mon Dec 9 15:44:36 2024 +0000
+
+    Merge branch '5-add-timer-component' into 'main'
+    
+    Develop a timer that displays the gameplay duration.
+    
+    Closes #5
+    
+    See merge request sapir-collage/sodoku!6
+
+[33mcommit 5b29d1bae88d4ae23850a58da27f83d1bf8c7c7d[m[33m ([m[1;32m5-add-timer-component[m[33m)[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Sun Dec 8 22:09:43 2024 +0200
+
+    remove comments from code
+
+[33mcommit b2e23868e91a5cc0fff783bf00ac63e17e716198[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Sun Dec 8 21:48:28 2024 +0200
+
+    update code,e
+
+[33mcommit 3e6b4437be676f2a9b3354825010c516f6d02c3b[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Sun Dec 8 15:44:55 2024 +0200
+
+    add timer component and style, improve Error components style for finish frontend work
+
+[33mcommit 282ca5a12482d04c51b6dfc00919b3926d14b491[m
+Merge: e5bafeb 30ed132
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Sun Dec 8 13:38:05 2024 +0200
+
+    Resolve merge conflicts and integrate Timer and ErrorHandlingInterface
+
+[33mcommit e5bafeb682fb36912464cdfd759860c1e80ee507[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Sun Dec 8 12:42:29 2024 +0200
+
+    Develop a timer that displays the gameplay duration.
+    Update the time dynamically during gameplay.
+
+[33mcommit 30ed1325eff400b4b923522c99dc49e5457393b2[m
+Merge: a8c4ff0 1789412
+Author: Eli Alhazov <elialhazov20@gmail.com>
+Date:   Sun Dec 8 10:34:38 2024 +0000
+
+    Merge branch '4-develop-error-handling-interface' into 'main'
+    
+    The component handles error messages from the backend using the errorMessage...
+    
+    Closes #4
+    
+    See merge request sapir-collage/sodoku!4
+
+[33mcommit 1789412323f3d1336aad9deaf81c9413ae2052df[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Sun Dec 8 09:53:11 2024 +0200
+
+    deleted node moduls and packege.json
+
+[33mcommit 2daee8affbc3f67d29b2c0830571c61ba2bc457b[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Sat Dec 7 20:50:15 2024 +0200
+
+    The component handles error messages from the backend using the errorMessage prop. If errorMessage is not empty, the .show class is applied, making the message visible. A custom button was added to simulate backend errors for testing purposes, triggering a sample error message. Once the backend is integrated, the button will be removed, and error messages will be displayed dynamically.
+
+[33mcommit e3a6d79d6d2f07e8d5b9f73a115bedbe3cf2fcae[m
+Merge: e40de9d a8c4ff0
+Author: michael_miron <micha767a@gmail.com>
+Date:   Thu Dec 5 19:01:23 2024 +0200
+
+    i added the branch "Enhancing Design with Bootstrap" after it approved to merge into main to my current branch   "Error-Handling Interface"
+
+[33mcommit e40de9dec28e9d1f5dd7fbc41d3ae2014f78cc85[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Thu Dec 5 18:38:32 2024 +0200
+
+    Current progress on Error-Handling Interface
+
+[33mcommit a8c4ff0611ba497e6855d9ab7d645deafcd2425b[m
+Merge: cb801a1 c822f55
+Author: Eli Alhazov <elialhazov20@gmail.com>
+Date:   Thu Dec 5 15:52:38 2024 +0000
+
+    Merge branch '3-enhancing-design-with-bootstrap' into 'main'
+    
+    I made an upgraded improvement to the page design using Bootstrap. I updated 2...
+    
+    Closes #3
+    
+    See merge request sapir-collage/sodoku!3
+
+[33mcommit c822f550e1fd624c2612cd2f39114cf301a39d13[m[33m ([m[1;32m3-enhancing-design-with-bootstrap[m[33m)[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Thu Dec 5 17:41:32 2024 +0200
+
+    delete package-lock.json
+
+[33mcommit 7819d729e85587428dc0d03fd88b7803f60c7162[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Thu Dec 5 17:24:05 2024 +0200
+
+    Improved code efficiency by using emptyCells and optimized board updates based on REVIEWER comments
+
+[33mcommit 66448af3941bccdc8f3aac50721d437f6bdf9f64[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Wed Dec 4 21:53:51 2024 +0200
+
+    I made an upgraded improvement to the page design using Bootstrap. I updated 2 buttons: Solve Step and ResetBoard. I added an icon to the browser. And I made the page responsive and centered in the center of the page.
+
+[33mcommit 17f8621b5742cfef140dde8595fc3959b0784372[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Wed Dec 4 21:48:43 2024 +0200
+
+    I made an upgraded improvement to the page design using Bootstrap. I updated 2 buttons: Solve Step and ResetBoard. I added an icon to the browser. And I made the page responsive and centered in the center of the page.
+
+[33mcommit ad5ef14c2280a6ad3507a8f500ce711b3142404e[m
+Author: Eli_Alhazov <elialhazov20@gmail.com>
+Date:   Sun Dec 1 20:44:57 2024 +0200
+
+    enhancing design with bootstrap ad css libery
+
+[33mcommit cb801a1a7f1da6f6092b8ca89cea8b68cd393de7[m
+Merge: 56b4080 9df43b7
+Author: michael_miron <micha767a@gmail.com>
+Date:   Sun Dec 1 16:02:24 2024 +0000
+
+    Merge branch '2-frontend-development' into 'main'
+    
+    added the basic frontend display and also a git ignore file
+    
+    See merge request sapir-collage/sodoku!1
+
+[33mcommit 9df43b749418b10cdb062d131d7e03a71c6ea48c[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Sun Dec 1 16:50:51 2024 +0200
+
+    added function the validates if the random numbers are placed right and also changed the range of the loop from 10 to 9 with <=
+
+[33mcommit 707aadc8ec9a5a4ecda98f1ca1b50b720a22fc1b[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Sat Nov 30 21:08:52 2024 +0200
+
+    added the basic frontend display and also a git ignore file
+
+[33mcommit 56b4080f806862f5f58b60fc23bb40d70b736d0c[m
+Author: michael_miron <micha767a@gmail.com>
+Date:   Mon Nov 25 14:43:40 2024 +0000
+
+    Initial commit

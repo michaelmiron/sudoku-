@@ -9,7 +9,9 @@ expect.extend({ toBeInTheDocument, toHaveClass });
 describe('ErrorHandlingInterface Component', () => {
     test('displays the error message when provided', () => {
         const errorMessage = 'An error occurred!';
+
         render(<ErrorHandlingInterface errorMessage={errorMessage} />);
+
         expect(screen.getByText(errorMessage)).toBeInTheDocument();
         expect(screen.getByText(errorMessage)).toHaveClass('error-message');
     });
@@ -17,13 +19,13 @@ describe('ErrorHandlingInterface Component', () => {
     test('does not display anything when no error message is provided', () => {
         render(<ErrorHandlingInterface errorMessage={null} />);
 
-
         expect(screen.queryByRole('alert')).toBeNull();
         expect(screen.queryByText(/An error occurred!/i)).toBeNull();
     });
 
     test('adds the "show" class to the container when there is an error message', () => {
         const errorMessage = 'Another error occurred!';
+
         render(<ErrorHandlingInterface errorMessage={errorMessage} />);
 
         const container = screen.getByText(errorMessage).closest('.error-container');

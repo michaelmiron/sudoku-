@@ -8,8 +8,6 @@ describe('ErrorHandlingInterface Component', () => {
     test('displays the error message when provided', () => {
         const errorMessage = 'An error occurred!';
         render(<ErrorHandlingInterface errorMessage={errorMessage} />);
-
-
         expect(screen.getByText(errorMessage)).toBeInTheDocument();
         expect(screen.getByText(errorMessage)).toHaveClass('error-message');
     });

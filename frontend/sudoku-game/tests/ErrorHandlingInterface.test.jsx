@@ -1,8 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { toBeInTheDocument, toHaveClass } from '@testing-library/jest-dom/matchers';
 import { describe, test, expect } from 'vitest';
 import ErrorHandlingInterface from '../src/components/ErrorHandlingInterface';
+
+expect.extend({ toBeInTheDocument, toHaveClass });
 
 describe('ErrorHandlingInterface Component', () => {
     test('displays the error message when provided', () => {

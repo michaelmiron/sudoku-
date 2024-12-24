@@ -9,3 +9,6 @@ class TestCheckBoardModel(TestCase):
             time_played="15:30",
             number_of_mistakes=5
         )
+        self.assertEqual(game.time_played, "15:30")
+        self.assertEqual(game.number_of_mistakes, 5)
+        self.assertIsNotNone(game.game_number)

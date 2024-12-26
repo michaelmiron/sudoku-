@@ -77,7 +77,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sudoku',
         'USER': 'root',
-        'PASSWORD': '77645213a',
+        'PASSWORD': 'Michael1!',
         'HOST': 'localhost',
         'PORT': '3306',
     }

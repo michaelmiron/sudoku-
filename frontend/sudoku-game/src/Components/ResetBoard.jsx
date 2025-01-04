@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const ResetBoard = ({ setInitialBoard, setBoard, generateBoard }) => {
     const resetBoard = () => {
         const newBoard = generateBoard();

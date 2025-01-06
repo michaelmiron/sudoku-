@@ -25,12 +25,12 @@
 
 .timer-container {
     position: absolute;
-    right: -240px;
+    right: -120px;
     top: 50%;
     transform: translateY(-50%);
     background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
-    padding: 20px;
+    padding: 0px 15px 0px 15px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     width: 200px;
@@ -62,30 +62,22 @@
 }
 
 
-.timer-button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    background: linear-gradient(135deg, #4a90e2, #357abd);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80px;
-    height: 45px;
+.btn {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 5px 10px;
+    font-size: 0.8rem;
     font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 
-.timer-button:hover {
-    background: linear-gradient(135deg, #357abd, #2a5d9c);
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
 
 
 .timer-button i {
@@ -93,20 +85,20 @@
     margin-right: 5px;
 }
 
+.timer-button.pause {
+    background-color: #ffcc00;
+    color: #333;
+}
 
 .timer-button.reset {
-    background: linear-gradient(135deg, #6c757d, #5a6268);
+    background-color: #ff4444;
+    color: #fff;
 }
 
-.timer-button.reset:hover {
-    background: linear-gradient(135deg, #5a6268, #495057);
+.btn:active {
+    transform: scale(0.95);
 }
 
-
-.timer-button.pause {
-    background: linear-gradient(135deg, #4a90e2, #357abd);
-}
-
-.timer-button.pause:hover {
-    background: linear-gradient(135deg, #357abd, #2a5d9c);
+.bi {
+    margin-right: 5px;
 }

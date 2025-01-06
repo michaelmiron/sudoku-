@@ -173,7 +173,7 @@ const SudokuBoard = () => {
 
             <div className="sudoku-timer-container">
                 <div className="timer-container">
-                    <Timer reset={resetTimer} />
+                    <Timer reset={resetTimer}/>
                 </div>
 
                 <div className="sudoku-container">
@@ -201,7 +201,7 @@ const SudokuBoard = () => {
             </div>
 
             <div className="button-container mt-4">
-                <ResetBoard setInitialBoard={handleResetBoard} setBoard={setBoard} generateBoard={generateBoard} />
+                <ResetBoard setInitialBoard={handleResetBoard} setBoard={setBoard} generateBoard={generateBoard}/>
                 <SolveStepButton
                     board={board}
                     setBoard={updateBoard}
@@ -214,9 +214,8 @@ const SudokuBoard = () => {
                 </button>
             </div>
             <div className="chat-container mt-4">
-                <ChatAssistant boardState={board} />
+                <ChatAssistant boardState={board}/>
             </div>
-
 
             <footer className="footer mt-5">
                 <p className="text-muted">© 2024 Sudoku Pro | By Michael Miron and Eli Alhazov :)</p>

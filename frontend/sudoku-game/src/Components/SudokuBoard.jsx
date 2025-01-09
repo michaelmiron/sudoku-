@@ -107,6 +107,10 @@ const SudokuBoard = () => {
                 setBackendError(`Error: ${data.error}`);
             } else {
                 setBackendError('');
+
+                if (newBoard.every(row => row.every(cell => cell !== ''))) {
+                    setEndGameMessage('🎉 WINNER! The board is complete! 🎉');
+                }
             }
         } catch {
             setBackendError('Error communicating with the backend.');

@@ -138,14 +138,12 @@ const SudokuBoard = () => {
             } else {
                 setEndGameMessage(data.message);
 
-
                 try {
                     const graphResponse = await fetch('/check_board/generate_game_plot/');
                     if (!graphResponse.ok) throw new Error('Failed to fetch game performance graph.');
 
                     const blob = await graphResponse.blob();
                     const graphUrl = URL.createObjectURL(blob);
-
 
                     setGraphImageSrc(graphUrl);
                 } catch (graphError) {
@@ -157,9 +155,6 @@ const SudokuBoard = () => {
             setBackendError(`An error occurred while saving the game: ${error.message}`);
         }
     };
-
-
-
 
     const handleResetBoard = () => {
         const { board, emptyCells } = generateBoard();
@@ -183,7 +178,6 @@ const SudokuBoard = () => {
     const [mistakes, setMistakes] = useState(0);
     const [endGameMessage, setEndGameMessage] = useState('');
     const [graphImageSrc, setGraphImageSrc] = useState(null);
-
 
     return (
         <div className="main-container">

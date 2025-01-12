@@ -136,7 +136,20 @@ const SudokuBoard = () => {
             if (!data.success) {
                 setBackendError(`Error: ${data.error}`);
             } else {
-                setEndGameMessage(`Game ${data.game_number} saved successfully!`);
+                setEndGameMessage(data.message);
+
+                try {
+                    const graphResponse = await fetch('/check_board/generate_game_plot/');
+                    if (!graphResponse.ok) throw new Error('Failed to fetch game performance graph.');
+
+                    const blob = await graphResponse.blob();
+                    const graphUrl = URL.createObjectURL(blob);
+
+                    setGraphImageSrc(graphUrl);
+                } catch (graphError) {
+                    console.error('Error fetching game performance graph:', graphError);
+                    setBackendError('Failed to load game performance graph.');
+                }
             }
         } catch (error) {
             setBackendError(`An error occurred while saving the game: ${error.message}`);
@@ -164,6 +177,7 @@ const SudokuBoard = () => {
     const [backendError, setBackendError] = useState('');
     const [mistakes, setMistakes] = useState(0);
     const [endGameMessage, setEndGameMessage] = useState('');
+    const [graphImageSrc, setGraphImageSrc] = useState(null);
 
     return (
         <div className="main-container">
@@ -217,6 +231,9 @@ const SudokuBoard = () => {
                     End Game
                 </button>
             </div>
+            <div className="graph-container mt-4">
+                {graphImageSrc && <img src={graphImageSrc} alt="Game Performance Graph" className="game-graph" />}
+            </div>
             <div className="chat-container mt-4">
                 <ChatAssistant boardState={board}/>
             </div>
@@ -226,6 +243,7 @@ const SudokuBoard = () => {
             </footer>
         </div>
     );
+
 };
 
 export default SudokuBoard;

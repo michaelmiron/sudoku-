@@ -1,8 +1,10 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from check_board.models import CheckBoard
 import openai
 import json
+import matplotlib.pyplot as plt
+import io
 
 @csrf_exempt
 def chat(request):
@@ -35,7 +37,6 @@ def chat(request):
     else:
         return JsonResponse({"error": "Invalid request method. Use POST."}, status=405)
 
-
 @csrf_exempt
 def save_game(request):
     try:
@@ -56,16 +57,13 @@ def save_game(request):
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
 
-
 def is_valid_row(board, row):
     numbers = [num for num in board[row] if num != 0]
     return len(numbers) == len(set(numbers))
 
-
 def is_valid_column(board, col):
     numbers = [board[row][col] for row in range(9) if board[row][col] != 0]
     return len(numbers) == len(set(numbers))
-
 
 def is_valid_subgrid(board, start_row, start_col):
     numbers = []
@@ -74,7 +72,6 @@ def is_valid_subgrid(board, start_row, start_col):
             if board[i][j] != 0:
                 numbers.append(board[i][j])
     return len(numbers) == len(set(numbers))
-
 
 def validate_sudoku_board(request):
     try:
@@ -96,3 +93,29 @@ def validate_sudoku_board(request):
 
     except Exception as e:
         return JsonResponse({'valid': False, 'error': str(e)})
+
+def generate_game_performance_plot(request):
+    try:
+        games = CheckBoard.objects.all().order_by('game_number')
+        if not games.exists():
+            return JsonResponse({'error': 'No game data available to generate plot.'}, status=400)
+
+        game_numbers = [game.game_number for game in games]
+        mistakes = [game.number_of_mistakes for game in games]
+
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(game_numbers, mistakes, label='Mistakes', marker='o', color='blue')
+        plt.title('Game Performance Over Time')
+        plt.xlabel('Game Number')
+        plt.ylabel('Mistakes')
+        plt.legend()
+
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png', bbox_inches='tight')
+        buf.seek(0)
+        return HttpResponse(buf, content_type='image/png')
+
+    except Exception as e:
+        print(f"Error generating graph: {str(e)}")
+        return JsonResponse({'error': f'Error generating graph: {str(e)}'}, status=500)

@@ -69,25 +69,6 @@ html, body {
 }
 
 
-.simulate-error-button {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    width: 150px;
-}
-
-.simulate-error-button:hover {
-    background-color: #c82333;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
 
 .timer-display {
     font-size: 1.5rem;
@@ -106,15 +87,6 @@ html, body {
     justify-content: center;
 }
 
-
-.coming-soon-alert {
-    margin-top: 15px;
-    font-size: 1rem;
-    padding: 10px 20px;
-    border-radius: 10px;
-    width: fit-content;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
 
 .sudoku-container {
@@ -172,14 +144,6 @@ html, body {
 }
 
 
-.coming-soon-alert {
-    width: fit-content;
-    margin: 20px auto;
-    font-size: 1.2rem;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
 
 

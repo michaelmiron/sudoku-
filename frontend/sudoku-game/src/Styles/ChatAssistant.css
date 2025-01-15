@@ -3,8 +3,8 @@
     top: 10%;
     left: 5%;
     transform: translateY(0);
-    width: 500px;
-    height: 600px;
+    width: 400px;
+    height: 450px;
     padding: 20px;
     border: 2px solid #007bff;
     border-radius: 12px;
@@ -21,29 +21,29 @@
     color: #007bff;
     font-weight: bold;
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .chat-assistant input {
     width: 100%;
-    padding: 15px;
-    margin-top: auto;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .chat-assistant button {
     margin-top: 10px;
-    padding: 12px 20px;
+    padding: 8px 16px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     align-self: flex-end;
 }
+
 .chat-toggle-button {
     position: absolute;
     top: 10%;
@@ -52,9 +52,9 @@
     color: white;
     border: none;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 100;
@@ -73,12 +73,12 @@
 .chat-response {
     flex-grow: 1;
     margin-top: 10px;
-    padding: 15px;
+    padding: 10px;
     background-color: #f9f9f9;
     border-radius: 6px;
     border: 1px solid #ccc;
     overflow-y: auto;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
 }
 
@@ -86,7 +86,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 20px;
+    font-size: 18px;
     background: none;
     border: none;
     color: #007bff;
